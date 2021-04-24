@@ -17,17 +17,34 @@ spring:
         default_catalog: db
         dialect: org.hibernate.dialect.MySQL5Dialect
 
+scheduled:
+  order-task-in-msec: 3600000
+
 ---
 spring:
-  profiles: test
+  config:
+    activate:
+      on-profile: test
 
 server:
   port: 10081
 
+mock-server:
+  endpoint: http://mock-server.tool.net:9081
+
+binstd-endpoint:
+  url: ${mock-server.endpoint}
+  key: test
+
 ---
 spring:
-  profiles: dev
+  config:
+    activate:
+      on-profile: dev
+
+binstd-endpoint:
+  url: https://api.binstd.com
+  key: 822c629b7815e01f
 
 server:
   port: 10080
-
